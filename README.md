@@ -44,6 +44,30 @@ legacy/             the previous EtherForum build (reference only)
 contract.sol        deployed contract source (reference)
 ```
 
+## Share links & link previews (meta.php)
+
+URL fragments (`#post14`) are never sent to servers, so hash links can't produce per-entity
+previews. Share buttons therefore copy pretty URLs, rewritten by `.htaccess` to `meta.php`:
+
+| Entity  | Share URL                                   | Redirects into the app at   |
+|---------|---------------------------------------------|-----------------------------|
+| Profile | `https://fusionx.social/username`           | `/#username`                |
+| Post    | `https://fusionx.social/post/14`            | `/#post14`                  |
+| Comment | `https://fusionx.social/post/14/comment/3`  | `/#post14/#comment3`        |
+
+`meta.php` reads the entity straight from the FusionLayer RPC (selectors precomputed, manual ABI
+decode, 5-min disk cache) and emits Open Graph / Twitter meta:
+
+- descriptions show the content with markdown converted to readable text (line breaks kept,
+  lists as bullets, syntax stripped)
+- **og:image only when the content contains an image** (markdown image or bare image URL) —
+  never the default site card on posts/comments; profiles use the avatar when set
+- hidden/unknown entities get a neutral no-image card
+
+Share buttons: posts (share icon), comments (share icon on each comment), profiles (share icon
+in the header). In-app navigation stays 100% hash-based, so the app itself still runs on any
+static host or from disk — the pretty URLs only need PHP on the public domain.
+
 ## Desktop app (Windows)
 
 The Electron wrapper lives in a **sibling project** — `..\fusionx-desktop` — kept outside this
