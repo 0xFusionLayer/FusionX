@@ -40,7 +40,6 @@ js/app.js           router, feeds, post/comment cards, profiles, settings
 docs/               documentation page
 faq/                FAQ page
 img/                logo, favicon, social card
-legacy/             the previous EtherForum build (reference only)
 contract.sol        deployed contract source (reference)
 ```
 
