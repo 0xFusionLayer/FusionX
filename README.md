@@ -76,8 +76,7 @@ static host or from disk — the pretty URLs only need PHP on the public domain.
 
 ## Desktop app (Windows)
 
-The Electron wrapper lives in a **sibling project** — `..\desktop` (project layout:
-`D:\FXL\fusionx\web` + `D:\FXL\fusionx\desktop`) — kept outside this folder so web deploys
+The Electron wrapper lives in a **sibling project** — `..\desktop` — kept outside this folder so web deploys
 never pick it up. It packages a copy of this web app:
 
 - **Data in AppData** — wallet keystore, theme, and RPC settings are stored as a plain JSON file
