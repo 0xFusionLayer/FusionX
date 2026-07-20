@@ -43,6 +43,13 @@ img/                logo, favicon, social card
 contract.sol        deployed contract source (reference)
 ```
 
+## Cache busting (release checklist)
+
+CSS/JS URLs in `index.html`, `docs/index.html`, and `faq/index.html` carry a `?v=X.Y.Z` query.
+`.htaccess` makes HTML always revalidate while CSS/JS cache for a year — so **on every release,
+bump the `?v=` value in those three files** (match the desktop version). That one change forces
+every visitor's browser to fetch the new assets; without it, users keep running stale cached code.
+
 ## Share links & link previews (meta.php)
 
 URL fragments (`#post14`) are never sent to servers, so hash links can't produce per-entity
@@ -69,8 +76,9 @@ static host or from disk — the pretty URLs only need PHP on the public domain.
 
 ## Desktop app (Windows)
 
-The Electron wrapper lives in a **sibling project** — `..\fusionx-desktop` — kept outside this
-folder so web deploys never pick it up. It packages a copy of this web app:
+The Electron wrapper lives in a **sibling project** — `..\desktop` (project layout:
+`D:\FXL\fusionx\web` + `D:\FXL\fusionx\desktop`) — kept outside this folder so web deploys
+never pick it up. It packages a copy of this web app:
 
 - **Data in AppData** — wallet keystore, theme, and RPC settings are stored as a plain JSON file
   in `%APPDATA%\FusionX\fusionx-data.json` (a preload bridge replaces `localStorage`; the web
@@ -83,9 +91,9 @@ folder so web deploys never pick it up. It packages a copy of this web app:
 Build (requires Node.js):
 
 ```
-cd ..\fusionx-desktop
+cd ..\desktop
 npm install           # requires Node.js 22+
-node make-icon.js     # once: generates build/icon.ico from ..\social\img\logo.png
+node make-icon.js     # once: generates build/icon.ico from ..\web\img\logo.png
 npm run dist          # copies the web app into app/ and produces dist/ (installer + portable exe)
 ```
 
@@ -117,4 +125,3 @@ so an internet connection is required.
 - **Live chain watcher** — ~per-block polling drives the "N new posts" feed banner, auto-updating
   platform stats, and the optional "Following only" feed filter.
 - Routes: `#home`, `#wallet`, `#profile`, `#settings`, `#post<id>`, `#post<id>/#comment<n>`, `#<username>`.
-  Old EtherForum deep-link format is preserved.
