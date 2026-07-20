@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FAQ – FusionX</title>
+  <link rel="icon" type="image/png" href="../img/favicon.ico">
+  <meta name="description" content="Frequently asked questions about FusionX – the fully decentralized, adminless social platform on FusionLayer with a built-in web wallet." />
+  <meta name="author" content="FusionX Team">
+  <meta name="theme-color" content="#6d5df6" />
+  <link rel="canonical" href="https://fusionx.social/faq/" />
+
+  <meta property="og:title" content="FusionX FAQ">
+  <meta property="og:description" content="Frequently asked questions about FusionX — the decentralized social platform on FusionLayer with a built-in web wallet.">
+  <meta property="og:image" content="https://fusionx.social/img/card.png">
+  <meta property="og:url" content="https://fusionx.social/faq/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FusionX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FusionX FAQ">
+  <meta name="twitter:image" content="https://fusionx.social/img/card.png">
+  <meta name="twitter:site" content="@0xFusionLayer">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/app.css?v=1.2.1">
+  <style>
+    .faq-item { padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-item h3 { font-size: 1.02rem; margin-bottom: 8px; display: flex; gap: 10px; align-items: baseline; }
+    .faq-item h3 i { color: var(--accent); font-size: .85rem; }
+    .faq-item p, .faq-item li { font-size: .93rem; color: var(--text); margin-bottom: 8px; }
+    .faq-item ul { padding-left: 22px; }
+  </style>
+</head>
+<body data-theme="dim">
+  <script>document.body.dataset.theme = localStorage.getItem("fusionx.theme") || "dim";</script>
+
+  <header id="topBar">
+    <a class="brand" href="../">
+      <img src="../img/logo.png" alt="" onerror="this.remove()">
+      <span class="brand-name">Fusion<span class="brand-x">X</span></span>
+      <span class="brand-tag">Frequently Asked Questions</span>
+    </a>
+    <span class="topbar-spacer"></span>
+    <a class="btn ghost sm" href="../"><i class="fas fa-arrow-left"></i> Back to App</a>
+  </header>
+
+  <div id="layout" style="grid-template-columns: 250px minmax(0,1fr); max-width: 1100px;">
+
+    <nav id="sidebar">
+      <a href="../"><i class="fas fa-house"></i><span>Home</span></a>
+      <a href="../docs/"><i class="fas fa-file-lines"></i><span>Docs</span></a>
+      <a href="https://github.com/0xFusionLayer/FusionX/releases" target="_blank" rel="noopener"><i class="fas fa-download"></i><span>Downloads</span></a>
+      <hr class="sidebar-sep">
+      <a href="https://fusionlayer.org/" target="_blank" rel="noopener"><i class="fas fa-globe"></i><span>Website</span></a>
+      <a href="https://fusionscan.net/" target="_blank" rel="noopener"><i class="fas fa-cube"></i><span>Explorer</span></a>
+      <a href="https://x.com/0xFusionLayer" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i><span>Twitter / X</span></a>
+      <a href="https://t.me/FusionLayer" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i><span>Telegram</span></a>
+      <a href="https://t.me/FusionLayerChat" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i><span>Community Chat</span></a>
+      <a href="https://discord.gg/FYjW7NUZSt" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i><span>Discord</span></a>
+    </nav>
+
+    <main id="mainContent">
+      <div class="panel">
+        <h2 style="margin-bottom: 6px;">Frequently Asked Questions</h2>
+        <p class="muted" style="margin-bottom: 10px;">Everything you need to know about FusionX and its built-in wallet.</p>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-hashtag"></i> What is FusionX?</h3>
+          <p>FusionX is a fully decentralized, censorship-resistant social platform powered entirely by a single
+          immutable smart contract deployed on <a href="https://fusionlayer.org/" target="_blank" rel="noopener">FusionLayer</a>.
+          There are no servers, no admins, and no off-chain dependencies. All actions — from account registration to
+          posting, commenting, reacting, following, and profile management — are executed directly on-chain.</p>
+          <ul>
+            <li>Posts, reposts with notes, comments, likes/dislikes, follows, pinned posts</li>
+            <li>Editable and hideable content — controlled only by the author</li>
+            <li>Unique, case-insensitive usernames</li>
+            <li>Markdown formatting in posts and comments</li>
+          </ul>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-wallet"></i> Do I need MetaMask or a browser extension?</h3>
+          <p><b>No.</b> FusionX has a built-in web wallet. You can create a fresh wallet or import an existing
+          private key directly in the app. The key is encrypted with your password and stored only on your device —
+          it never touches a server. Once unlocked, you can post, comment, and react without confirming a popup for
+          every action.</p>
+          <p>Advanced users can still use MetaMask elsewhere: add FusionLayer via
+          <a href="https://fusionlayer.org/metamask" target="_blank" rel="noopener">fusionlayer.org/metamask</a>
+          and interact with the same contract.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-key"></i> Where is my private key stored? Is it safe?</h3>
+          <p>Your key is encrypted with your password using the industry-standard Ethereum keystore format
+          (scrypt + AES-128-CTR) and saved only on your device — in the <b>web app</b> it's kept in your
+          browser's local storage; in the <b>desktop app</b> it's kept in your AppData folder
+          (<code>%APPDATA%\FusionX\fusionx-data.json</code> on Windows, handy for backups). Unlocking decrypts it
+          for the current session only; logging out locks it again.</p>
+          <p><b>Important:</b> FusionX cannot reset passwords or recover keys. Back up your private key when it is
+          shown to you at creation — if you lose both the password and the backup, the wallet is gone.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-right-from-bracket"></i> What does Logout do?</h3>
+          <p>Logout locks your wallet and ends the session. The encrypted keystore stays on your device, so next time
+          you just select your saved wallet address and enter your password to unlock. Use
+          <i>Remove wallet from device</i> (on the Wallet page) if you want to wipe the keystore entirely — for
+          example on a shared computer.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-coins"></i> Why do I need FXL?</h3>
+          <p>Every interaction (posting, commenting, reacting, following…) is a FusionLayer transaction and costs a
+          small amount of FXL gas. Your balance is shown in the top bar and on the Wallet page, and refreshes
+          automatically — every few seconds, after every transaction, and whenever you return to the tab.
+          Reading content is always free.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-bolt"></i> How does the feed stay up to date?</h3>
+          <p>FusionX watches the chain block by block. When new posts land on-chain, a banner appears at the top
+          of your feed — <i>"3 new posts — click to show"</i> — and clicking it loads just the new posts without
+          reloading anything else. Platform stats and the recently-joined list update automatically the same way.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-filter"></i> What is the "Following only" filter?</h3>
+          <p>A toggle at the top of the Home feed (visible once you have an account, off by default). When enabled,
+          the feed — including every "new posts" import — only shows posts from accounts you follow, plus your own.
+          If an import contains nothing from your follows, FusionX tells you how many posts were filtered out and
+          over how many blocks.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-download"></i> Do I need this website to use FusionX?</h3>
+          <p><b>No.</b> The website is just one client. Official builds of the FusionX app are published at
+          <a href="https://github.com/0xFusionLayer/FusionX/releases" target="_blank" rel="noopener">github.com/0xFusionLayer/FusionX/releases</a>
+          — download one and run FusionX locally as a native app, with the same built-in wallet, feeds, and
+          your same on-chain account. More platforms are on the way.</p>
+          <p>For maximum independence, pair a downloaded build with your own node in
+          <b>Settings → Network RPC</b> (even <code>http://localhost:8545</code>) — then no part of your
+          experience depends on any website or third-party server. Only download from the official GitHub
+          releases page; a tampered client can steal your keys.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-network-wired"></i> Can I use my own RPC endpoint?</h3>
+          <p>Yes. Go to <b>Settings → Network RPC</b> — no wallet or account needed. You'll see which endpoint the
+          app is currently using (with a live health check), can switch between the official endpoints, or add your
+          own — including a local node like <code>http://localhost:8545</code>. Once set, the <i>entire app</i>
+          (feeds, transactions, balances, live updates) works through your endpoint. Custom RPCs are saved on your
+          device, each one is tested before use, and you can reset to the defaults with one click.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-user-plus"></i> How do I create an account?</h3>
+          <p>After creating or unlocking your wallet, choose a nickname (display name) and a unique username
+          (at least 5 characters, letters and numbers). Registration is a one-time on-chain transaction. Usernames
+          are case-insensitive: <code>Alice</code> and <code>alice</code> are the same handle.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-pen"></i> Can I edit or delete my posts?</h3>
+          <p>You can <b>edit</b> your posts, reposts, and comments at any time — only the author can do this.
+          Nothing can truly be deleted from a blockchain, but you can <b>hide</b> your content: hidden posts and
+          comments are not shown to other users, and you can unhide them whenever you like.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-retweet"></i> How do reposts work?</h3>
+          <p>A repost shares someone's post to your profile with an optional note on top — like a quote-tweet.
+          The original post keeps a repost counter, and your repost links back to it.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-shield-halved"></i> Who moderates FusionX?</h3>
+          <p>Nobody. There are no admins, and the contract has no owner functions. Only authors control the
+          visibility of their own content. That is the point: the platform cannot censor you, because there is no
+          platform operator — just a contract and whoever chooses to run the UI.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-image"></i> How do profile pictures work?</h3>
+          <p>Profile and cover pictures are URLs stored on-chain in your profile. Point them at any public image
+          (IPFS gateways work great for permanence). If the image fails to load, FusionX shows a fallback with your
+          initial.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-code"></i> Can I build my own client?</h3>
+          <p>Yes! The contract is the platform. Read the <a href="../docs/">documentation</a> for the data model and
+          query patterns — everything is readable via deterministic IDs with no indexer required. The contract is
+          verified at
+          <a href="https://fusionscan.net/address/0x13e4b3fE79388C6eF206481655c8557320811104" target="_blank" rel="noopener">FusionScan</a>.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3><i class="fas fa-circle-question"></i> Where can I get help?</h3>
+          <p>Join the community: <a href="https://t.me/FusionLayerChat" target="_blank" rel="noopener">Telegram Chat</a>,
+          <a href="https://discord.gg/FYjW7NUZSt" target="_blank" rel="noopener">Discord</a>, or follow
+          <a href="https://x.com/0xFusionLayer" target="_blank" rel="noopener">@0xFusionLayer</a> for announcements.</p>
+        </div>
+      </div>
+
+      <footer>© 2026 FusionX · <a href="../">Back to the app</a></footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FusionX – Built on FusionLayer. Beyond Control.</title>
+  <link rel="icon" type="image/png" href="img/favicon.ico">
+  <meta name="description" content="FusionX is a decentralized social platform for posting content directly to FusionLayer—permanently, permissionlessly, and without censorship. No extensions needed: your wallet lives in the app." />
+  <meta name="keywords" content="FusionX, FusionLayer, FXL, blockchain, decentralized, social media, no censorship, Web3, on-chain" />
+  <meta name="author" content="FusionX Team" />
+  <link rel="canonical" href="https://fusionx.social/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FusionX">
+  <meta property="og:description" content="Decentralized social on FusionLayer — permanent, permissionless, censorship-free. Built-in wallet, no extensions.">
+  <meta property="og:image" content="https://fusionx.social/img/card.png">
+  <meta property="og:url" content="https://fusionx.social/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FusionX">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FusionX">
+  <meta name="twitter:description" content="Decentralized social on FusionLayer — permanent, permissionless, censorship-free.">
+  <meta name="twitter:image" content="https://fusionx.social/img/card.png">
+  <meta name="twitter:site" content="@0xFusionLayer">
+  <meta name="twitter:creator" content="@0xFusionLayer">
+
+  <meta name="theme-color" content="#6d5df6" />
+
+  <!-- Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.2/ethers.umd.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/app.css?v=1.2.1">
+</head>
+<body data-theme="dim">
+
+  <!-- Top Bar -->
+  <header id="topBar">
+    <a class="brand" href="#home">
+      <img src="img/logo.png" alt="" onerror="this.remove()">
+      <span class="brand-name">Fusion<span class="brand-x">X</span></span>
+      <span class="brand-tag">Built on FusionLayer. Beyond Control.</span>
+    </a>
+    <span class="topbar-spacer"></span>
+    <button class="icon-btn" id="themeBtn" title="Switch theme"><i class="fas fa-cloud-moon"></i></button>
+    <div id="walletArea"></div>
+  </header>
+
+  <div id="layout">
+
+    <!-- Left navigation -->
+    <nav id="sidebar">
+      <a href="#home" data-nav="home"><i class="fas fa-house"></i><span>Home</span></a>
+      <a href="#wallet" data-nav="wallet"><i class="fas fa-wallet"></i><span>Wallet</span></a>
+      <a href="#profile" data-nav="profile"><i class="fas fa-user"></i><span>My Profile</span></a>
+      <a href="#settings" data-nav="settings"><i class="fas fa-gear"></i><span>Settings</span></a>
+      <hr class="sidebar-sep">
+      <a href="docs/"><i class="fas fa-file-lines"></i><span>Docs</span></a>
+      <a href="faq/"><i class="fas fa-circle-question"></i><span>FAQ</span></a>
+      <a href="https://github.com/0xFusionLayer/FusionX/releases" target="_blank" rel="noopener"><i class="fas fa-download"></i><span>Downloads</span></a>
+      <hr class="sidebar-sep">
+      <div class="sidebar-heading">FusionLayer</div>
+      <a href="https://fusionlayer.org/" target="_blank" rel="noopener"><i class="fas fa-globe"></i><span>Website</span></a>
+      <a href="https://fusionscan.net/" target="_blank" rel="noopener"><i class="fas fa-cube"></i><span>Explorer</span></a>
+      <a href="https://fusionlayer.org/getfxl/" target="_blank" rel="noopener"><i class="fas fa-coins"></i><span>Get FXL</span></a>
+    </nav>
+
+    <!-- Main content -->
+    <main id="mainContent">
+      <div class="routePage" id="homePage"></div>
+      <div class="routePage" id="postPage"></div>
+      <div class="routePage" id="profilePage"></div>
+      <div class="routePage" id="settingsPage"></div>
+      <div class="routePage" id="walletPage"></div>
+    </main>
+
+    <!-- Right side -->
+    <aside id="rightSide">
+      <div class="search-row">
+        <input type="text" id="searchInput" class="input" placeholder="Search @user or post #id" />
+        <button class="icon-btn" id="searchBtn" title="Search"><i class="fas fa-magnifying-glass"></i></button>
+      </div>
+
+      <div class="panel">
+        <h3><i class="fas fa-chart-simple"></i> Platform Stats</h3>
+        <div class="stat-tiles" id="statsContent"></div>
+      </div>
+
+      <div class="panel">
+        <h3><i class="fas fa-user-plus"></i> Recently Joined</h3>
+        <div id="recentlyJoined"></div>
+      </div>
+
+      <div class="panel">
+        <h3><i class="fas fa-users"></i> Community</h3>
+        <div class="link-list">
+          <a href="https://x.com/0xFusionLayer" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i> Twitter / X</a>
+          <a href="https://t.me/FusionLayer" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Telegram Channel</a>
+          <a href="https://t.me/FusionLayerChat" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i> Community Chat</a>
+          <a href="https://discord.gg/FYjW7NUZSt" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i> Discord</a>
+          <a href="https://github.com/0xFusionLayer" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- Mobile bottom navigation -->
+  <nav id="mobileNav">
+    <a href="#home" data-nav="home"><i class="fas fa-house"></i>Home</a>
+    <a href="#wallet" data-nav="wallet"><i class="fas fa-wallet"></i>Wallet</a>
+    <a href="#profile" data-nav="profile"><i class="fas fa-user"></i>Profile</a>
+    <a href="#settings" data-nav="settings"><i class="fas fa-gear"></i>Settings</a>
+  </nav>
+
+  <footer>
+    © 2026 FusionX · Running fully on-chain on <a href="https://fusionlayer.org/" target="_blank" rel="noopener">FusionLayer</a> · No servers, no admins, no limits.
+  </footer>
+
+  <!-- Hosts for toasts & transaction cards -->
+  <div id="toasts"></div>
+  <div id="txCards"></div>
+
+  <!-- App scripts -->
+  <script src="js/config.js?v=1.2.1"></script>
+  <script src="js/abi.js?v=1.2.1"></script>
+  <script src="js/wallet.js?v=1.2.1"></script>
+  <script src="js/ui.js?v=1.2.1"></script>
+  <script src="js/chain.js?v=1.2.1"></script>
+  <script src="js/wallet-ui.js?v=1.2.1"></script>
+  <script src="js/app.js?v=1.2.1"></script>
+</body>
+</html>

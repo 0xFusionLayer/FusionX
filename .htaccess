@@ -1,0 +1,25 @@
+# FusionX — caching policy:
+#  - HTML always revalidates, so users pick up new releases immediately
+#  - CSS/JS are versioned via ?v=X.Y.Z query in the HTML, so they can cache long;
+#    bumping the version in the HTML busts every browser's cache at once
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Pretty URLs for link previews (meta.php reads the chain and
+# emits per-entity Open Graph tags, then redirects into the app).
+# Real files and directories (css/, js/, docs/, img/…) are always served as-is.
+RewriteEngine On
+
+RewriteRule ^post/([0-9]+)/comment/([0-9]+)/?$ meta.php?post=$1&comment=$2 [L,QSA]
+RewriteRule ^post/([0-9]+)/?$ meta.php?post=$1 [L,QSA]
+
+# usernames: only if nothing real exists at that path
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([A-Za-z0-9_]{1,30})/?$ meta.php?user=$1 [L,QSA]

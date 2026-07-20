@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FusionX Documentation</title>
+  <link rel="icon" type="image/png" href="../img/favicon.ico">
+  <meta name="description" content="Documentation for FusionX – a fully decentralized, adminless social platform powered by a single smart contract on FusionLayer. Learn the architecture, built-in wallet, data model, and indexer-free query patterns." />
+  <meta name="author" content="FusionX Team">
+  <meta name="theme-color" content="#6d5df6" />
+  <link rel="canonical" href="https://fusionx.social/docs/" />
+
+  <meta property="og:title" content="FusionX Documentation">
+  <meta property="og:description" content="Architecture, built-in wallet, data model, and indexer-free query patterns of FusionX on FusionLayer.">
+  <meta property="og:image" content="https://fusionx.social/img/card.png">
+  <meta property="og:url" content="https://fusionx.social/docs/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="FusionX">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="FusionX Documentation">
+  <meta name="twitter:image" content="https://fusionx.social/img/card.png">
+  <meta name="twitter:site" content="@0xFusionLayer">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/app.css?v=1.2.1">
+  <style>
+    /* docs-specific tweaks on top of the main layout */
+    #docsLayout { grid-template-columns: 250px minmax(0, 1fr); max-width: 1100px; }
+    .doc-section { margin-bottom: 18px; }
+    .doc-section h2 { font-size: 1.15rem; margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+    .doc-section h2 i { color: var(--accent); }
+    .doc-section h4 { margin: 14px 0 6px; }
+    .doc-section p, .doc-section li { font-size: .93rem; color: var(--text); margin-bottom: 8px; }
+    .doc-section ul, .doc-section ol { padding-left: 22px; margin-bottom: 8px; }
+    .doc-section table { width: 100%; border-collapse: collapse; font-size: .88rem; margin: 8px 0; }
+    .doc-section th, .doc-section td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+    .doc-section th { color: var(--muted); font-size: .78rem; text-transform: uppercase; letter-spacing: .06em; }
+    .callout { background: var(--panel-2); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--radius-sm); padding: 12px 14px; margin: 10px 0; font-size: .9rem; }
+    .anchor { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body data-theme="dim">
+  <script>document.body.dataset.theme = localStorage.getItem("fusionx.theme") || "dim";</script>
+
+  <header id="topBar">
+    <a class="brand" href="../">
+      <img src="../img/logo.png" alt="" onerror="this.remove()">
+      <span class="brand-name">Fusion<span class="brand-x">X</span></span>
+      <span class="brand-tag">Documentation</span>
+    </a>
+    <span class="topbar-spacer"></span>
+    <a class="btn ghost sm" href="../"><i class="fas fa-arrow-left"></i> Back to App</a>
+  </header>
+
+  <div id="layout" style="grid-template-columns: 250px minmax(0,1fr); max-width: 1100px;">
+
+    <nav id="sidebar">
+      <a href="#overview"><i class="fas fa-eye"></i><span>Overview</span></a>
+      <a href="#wallet"><i class="fas fa-wallet"></i><span>Built-in Wallet</span></a>
+      <a href="#chain"><i class="fas fa-cube"></i><span>FusionLayer Chain</span></a>
+      <a href="#builds"><i class="fas fa-download"></i><span>Official Builds</span></a>
+      <a href="#architecture"><i class="fas fa-sitemap"></i><span>Architecture</span></a>
+      <a href="#model"><i class="fas fa-database"></i><span>Data Model</span></a>
+      <a href="#queries"><i class="fas fa-magnifying-glass"></i><span>Query Patterns</span></a>
+      <a href="#api"><i class="fas fa-code"></i><span>Contract API</span></a>
+      <hr class="sidebar-sep">
+      <a href="../faq/"><i class="fas fa-circle-question"></i><span>FAQ</span></a>
+      <a href="https://github.com/0xFusionLayer/FusionX/releases" target="_blank" rel="noopener"><i class="fas fa-download"></i><span>Downloads</span></a>
+      <a href="https://fusionscan.net/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i><span>FusionScan</span></a>
+    </nav>
+
+    <main id="mainContent">
+
+      <div class="panel doc-section anchor" id="overview">
+        <h2><i class="fas fa-eye"></i> Overview</h2>
+        <p><b>FusionX</b> is a fully decentralized, adminless social platform powered by a single immutable smart
+        contract deployed on <a href="https://fusionlayer.org/" target="_blank" rel="noopener">FusionLayer</a>.
+        There are no servers, no databases, no admins, and no off-chain dependencies. Every action — account
+        registration, posting, commenting, reacting, following, profile management — is executed directly on-chain.</p>
+        <ul>
+          <li><b>Permanent</b> — content lives in FusionLayer state, forever.</li>
+          <li><b>Permissionless</b> — anyone with a wallet and a little FXL can participate.</li>
+          <li><b>Censorship-resistant</b> — no one can delete or moderate your content; only authors can hide their own posts.</li>
+          <li><b>Indexer-free</b> — the UI reads everything straight from the contract via deterministic IDs. No Graph, no backend.</li>
+          <li><b>Live</b> — the app watches the chain block by block: new posts are announced with a
+            "N new posts" banner, and platform stats update automatically.</li>
+          <li><b>Your feed, your rules</b> — an optional "Following only" filter shows just the accounts you follow.</li>
+        </ul>
+        <div class="callout"><i class="fas fa-file-contract"></i>
+          Contract address: <code>0x13e4b3fE79388C6eF206481655c8557320811104</code>
+          — <a href="https://fusionscan.net/address/0x13e4b3fE79388C6eF206481655c8557320811104" target="_blank" rel="noopener">view on FusionScan</a>
+        </div>
+      </div>
+
+      <div class="panel doc-section anchor" id="wallet">
+        <h2><i class="fas fa-wallet"></i> Built-in Wallet</h2>
+        <p>FusionX ships with an <b>in-app web wallet</b> — no MetaMask or browser extension required.</p>
+        <h4>How it works</h4>
+        <ul>
+          <li><b>Create</b> — a fresh key pair is generated locally on your device (in the browser or in the desktop app). You are shown the private key and recovery phrase <i>once</i> and must confirm you saved them.</li>
+          <li><b>Import</b> — paste an existing private key to use a wallet you already own.</li>
+          <li><b>Encryption</b> — the key is encrypted with your password using the standard Ethereum keystore format (scrypt + AES) and stored only on your device: in the <b>web app</b> it lives in your browser's localStorage; in the <b>desktop app</b> it lives in your AppData folder (<code>%APPDATA%\FusionX\fusionx-data.json</code> on Windows). Either way it never leaves your device.</li>
+          <li><b>Sessions</b> — after unlocking, the wallet stays unlocked so you are not asked for your password on every interaction: in the web app for as long as the browser tab lives, in the desktop app until you quit or restart it (minimizing to the tray does not lock it). <b>Logout</b> locks the wallet again; the encrypted keystore remains so you can unlock it later by entering just your password.</li>
+          <li><b>Send / Receive</b> — the Wallet page lets you transfer FXL and shows your live balance, which is also visible in the top bar. The balance refreshes automatically (every few seconds, after every transaction, and whenever you return to the tab).</li>
+        </ul>
+        <div class="callout" style="border-left-color: var(--danger)"><i class="fas fa-triangle-exclamation"></i>
+          <b>Self-custody:</b> FusionX has no servers and cannot reset passwords or recover keys. If you lose both
+          your password and your private-key backup, the wallet — and any FXL in it — is unrecoverable.
+        </div>
+      </div>
+
+      <div class="panel doc-section anchor" id="chain">
+        <h2><i class="fas fa-cube"></i> FusionLayer Chain</h2>
+        <table>
+          <tr><th>Setting</th><th>Value</th></tr>
+          <tr><td>Network Name</td><td>FusionLayer</td></tr>
+          <tr><td>Chain ID</td><td><code>5070</code></td></tr>
+          <tr><td>Currency</td><td>FXL</td></tr>
+          <tr><td>RPC URL</td><td><code>https://rpc.fusionlayer.org/</code></td></tr>
+          <tr><td>Alternative RPC</td><td><code>https://rpc.fusionscan.net/</code></td></tr>
+          <tr><td>Explorer</td><td><a href="https://fusionscan.net/" target="_blank" rel="noopener">https://fusionscan.net/</a></td></tr>
+        </table>
+        <h4>Custom RPC endpoints</h4>
+        <p>By default the app uses the official endpoints above (with automatic failover). In
+        <b>Settings → Network RPC</b> you can point the <i>entire app</i> — reads, transactions, balance,
+        live updates — at any endpoint you like, including your own node or a local one
+        (e.g. <code>http://localhost:8545</code>). No wallet or account is needed to change it.</p>
+        <ul>
+          <li>Custom RPCs are saved on your device and can be added or removed at any time.</li>
+          <li>Each endpoint is health-checked before use (reachability, chain ID, latest block, latency).</li>
+          <li>If an endpoint reports a different chain ID you are warned before switching.</li>
+          <li>One click resets back to the official endpoints.</li>
+        </ul>
+        <p>Prefer using your own wallet app? You can also add FusionLayer to MetaMask via
+        <a href="https://fusionlayer.org/metamask" target="_blank" rel="noopener">fusionlayer.org/metamask</a> —
+        the contract is a normal EVM contract and can be used from any wallet.</p>
+      </div>
+
+      <div class="panel doc-section anchor" id="builds">
+        <h2><i class="fas fa-download"></i> Official Builds — run FusionX without the website</h2>
+        <p>The website is just one way to reach the platform. Because FusionX is a smart contract, the app is
+        only a client — and you can run that client yourself, with <b>no dependency on this domain</b>.</p>
+        <ul>
+          <li><b>Download</b> — official builds are published at
+            <a href="https://github.com/0xFusionLayer/FusionX/releases" target="_blank" rel="noopener">github.com/0xFusionLayer/FusionX/releases</a>.
+            Install one and use FusionX as a native app: same built-in wallet, same feeds, same accounts.
+            Your keys are stored locally on your device, and more platforms are on the way.</li>
+          <li><b>Fully local operation</b> — combine a downloaded build with your own node via
+            <b>Settings → Network RPC</b> (e.g. <code>http://localhost:8545</code>) and nothing you do touches
+            any third-party infrastructure: your client, your node, the public chain.</li>
+          <li><b>Self-host the web UI</b> — the site is 100% static files; anyone can mirror it on any host or
+            open it from disk. The contract doesn't care which client talks to it.</li>
+        </ul>
+        <div class="callout"><i class="fas fa-shield-halved"></i>
+          Only download builds from the official GitHub releases page linked above — never from third-party
+          sites or chat links. A tampered client can steal your keys.
+        </div>
+      </div>
+
+      <div class="panel doc-section anchor" id="architecture">
+        <h2><i class="fas fa-sitemap"></i> Architecture</h2>
+        <p>The entire platform is two things:</p>
+        <ol>
+          <li><b>One smart contract</b> (<code>FusionX</code>) holding all state: users, posts, reposts, comments, reactions, and follows.</li>
+          <li><b>A static web UI</b> (this site) that talks to the contract over JSON-RPC. Reads use a public RPC endpoint; writes are signed locally by the built-in wallet and broadcast to the same endpoint.</li>
+        </ol>
+        <p>Because the frontend is static and the state is on-chain, anyone can host a copy of the UI — or build
+        their own — and the platform keeps working. The contract is the platform.</p>
+        <h4>Safety rails built into the contract</h4>
+        <ul>
+          <li><code>onlyEOA</code> — only externally-owned accounts can interact; other contracts are rejected.</li>
+          <li>Only authors can edit, hide, or pin their own content. Nobody — including the deployer — has special powers.</li>
+          <li>Usernames are unique and case-insensitive (<code>Alice</code> and <code>alice</code> are the same handle).</li>
+        </ul>
+      </div>
+
+      <div class="panel doc-section anchor" id="model">
+        <h2><i class="fas fa-database"></i> Data Model</h2>
+        <table>
+          <tr><th>Entity</th><th>Key fields</th></tr>
+          <tr><td><b>UserBasic</b></td><td>userId, username, accountCreationTime, isRegistered</td></tr>
+          <tr><td><b>UserProfile</b></td><td>nickname, about, website, location, profilePicture, coverPicture, pinnedPost</td></tr>
+          <tr><td><b>UserStats</b></td><td>postCount, commentCount, followerCount, followingCount</td></tr>
+          <tr><td><b>Post</b></td><td>globalPostId, author, authorPostId, postTime, content, counts, isHidden, isRepost, originalPostId, reposterContent</td></tr>
+          <tr><td><b>Comment</b></td><td>commentId (per post), author, commentTime, comment, counts, isHidden</td></tr>
+        </table>
+        <ul>
+          <li>Posts get a <b>global sequential ID</b> (1, 2, 3 …) and a per-author sequential ID.</li>
+          <li>Comments are numbered sequentially <b>per post</b> (post 7's comments are 1, 2, 3 …).</li>
+          <li>Reposts are regular posts flagged <code>isRepost</code> with a pointer to the original and an optional note.</li>
+          <li>Reactions are one of <code>like</code> / <code>dislike</code> / none, one per user per item, freely switchable.</li>
+          <li>Hiding sets a flag — the content stays in state but read functions return an empty string for hidden items.</li>
+        </ul>
+      </div>
+
+      <div class="panel doc-section anchor" id="queries">
+        <h2><i class="fas fa-magnifying-glass"></i> Query Patterns (indexer-free)</h2>
+        <p>Sequential IDs make every feed a deterministic loop — no event scanning or indexer needed:</p>
+        <ul>
+          <li><b>Home feed</b> — read <code>getGlobalPostCount()</code>, then <code>getPost(id)</code> descending. FusionX fetches batches in parallel and streams them in as you scroll.</li>
+          <li><b>User feed</b> — <code>getUserStats(user).postCount</code>, then <code>getGlobalPostId(user, n)</code> → <code>getPost(id)</code>.</li>
+          <li><b>Comments</b> — <code>getPostCommentCount(postId)</code>, then <code>getComment(postId, n)</code>.</li>
+          <li><b>User comments</b> — <code>getUserCommentCount(user)</code>, then <code>getUserComment(user, n)</code> which returns a (post, comment) pointer.</li>
+          <li><b>Profiles</b> — resolve <code>getUserAddressByUsername(name)</code> then read basic/profile/stats.</li>
+        </ul>
+        <h4>Live updates</h4>
+        <p>A lightweight watcher polls the chain roughly once per block. When
+        <code>getGlobalPostCount()</code> grows past the newest post in your feed, a
+        "N new posts — click to show" banner appears; clicking it fetches only the new posts and prepends
+        them without reloading the feed. Platform stats and the recently-joined list update the same way.
+        With the <b>Following only</b> filter on, each import is checked against
+        <code>getIsFollowing()</code>; if nothing matches you're told how many posts were filtered out over
+        how many blocks. Polling pauses while the tab is hidden and resumes instantly when you return.</p>
+      </div>
+
+      <div class="panel doc-section anchor" id="api">
+        <h2><i class="fas fa-code"></i> Contract API</h2>
+        <h4>Write functions</h4>
+        <table>
+          <tr><th>Function</th><th>Purpose</th></tr>
+          <tr><td><code>createAccount(nickname, username)</code></td><td>Register. Username ≥ 5 chars, letters/digits, unique (case-insensitive).</td></tr>
+          <tr><td><code>createPost(content)</code></td><td>Publish a post (markdown supported by the UI).</td></tr>
+          <tr><td><code>createRepost(postId, note)</code></td><td>Repost with an optional note.</td></tr>
+          <tr><td><code>createComment(postId, text)</code></td><td>Comment on a post.</td></tr>
+          <tr><td><code>editPost / editRepost / editComment</code></td><td>Author-only edits.</td></tr>
+          <tr><td><code>hidePost / hideComment</code></td><td>Author-only visibility toggle.</td></tr>
+          <tr><td><code>reactToPost / reactToComment</code></td><td>"like", "dislike" or anything else to clear.</td></tr>
+          <tr><td><code>followUser(user, bool)</code></td><td>Follow / unfollow.</td></tr>
+          <tr><td><code>pinPost(postId)</code></td><td>Pin one of your posts (0 unpins).</td></tr>
+          <tr><td><code>changeUsername / updateNickname / updateAbout / updateWebsite / updateLocation / updateProfilePicture / updateCoverPicture</code></td><td>Profile management.</td></tr>
+        </table>
+        <h4>Read functions</h4>
+        <p><code>getTotalUsers, getGlobalPostCount, getPost, getComment, getPostCommentCount, getUserBasic,
+        getUserProfile, getUserStats, getUserAddressByUsername, getUserAddressById, getGlobalPostId,
+        getUserComment, getUserCommentCount, getUserReactionOnPost, getUserReactionOnComment, getIsFollowing,
+        isUserRegistered, getHasCommentedOnPost, getHasRepostedAPost</code></p>
+        <p>All reads are free; all writes cost a small amount of FXL gas.</p>
+      </div>
+
+      <footer>© 2026 FusionX · <a href="../">Back to the app</a></footer>
+    </main>
+  </div>
+</body>
+</html>
